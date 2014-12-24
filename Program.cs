@@ -13,18 +13,6 @@ namespace textBasedRPG_CS
         static string input = "";
 
 
-        static int helmetBoost { get; set; }
-        static int chestplateBoost { get; set; }
-        static int leggingsBoost { get; set; }
-        static int footwearBoost { get; set; }
-        public static int ArmorBoost
-        {
-            get
-            {
-                return helmetBoost + chestplateBoost + leggingsBoost + footwearBoost;
-            }
-        }
-
 
         static bool callBattleAgain;
 
@@ -40,6 +28,8 @@ namespace textBasedRPG_CS
         {
             PlayerStats player = new PlayerStats();
             BinaryFormatter formatter = new BinaryFormatter();
+
+
 inputFail:
             Console.WriteLine("Type play. Or, type load to load stats." + Environment.NewLine);
             Console.WriteLine("Save file exists: " + File.Exists("playerStats.dat"));
@@ -180,7 +170,7 @@ inputFail:
                     Console.ReadLine();
                     Console.Clear();
 
-                    Console.WriteLine("Dark Troll HP: 15." + Environment.NewLine);
+                    Console.WriteLine("Dark Troll HP: 15.");
                     Console.WriteLine("Your HP: 20.");
                     Console.ReadLine();
                     Console.Clear();
@@ -207,10 +197,10 @@ inputFail:
                     Console.ReadLine();
                     Console.Clear();
 
-                    helmetBoost = 2; //Bronze Helmet equipped
-                    chestplateBoost = 4; //Bronze Chestplate equipped
-                    leggingsBoost = 2; //Bronze Leggings equipped
-                    footwearBoost = 2; //Bronze Footwear equipped
+                    player.HelmetBoost = 2; //Bronze Helmet equipped
+                    player.ChestplateBoost = 4; //Bronze Chestplate equipped
+                    player.LeggingsBoost = 2; //Bronze Leggings equipped
+                    player.FootwearBoost = 2; //Bronze Footwear equipped
 
                     player.GameProgress = "bronzeArmor"; //Bronze armor acquired
 
@@ -234,13 +224,35 @@ inputFail:
                     Console.ReadLine();
                     Console.Clear();
 
-                    Console.WriteLine("You head out, and enter the shaft to find a skeletal warrior there.");
+                    Console.WriteLine("You head out, and enter the shaft to find a Skeletal Warrior there.");
                     Console.ReadLine();
                     Console.Clear();
 
+                    Console.WriteLine("Skeletal Warrior HP: 25.");
+                    Console.WriteLine("Your HP: " + (20 + player.ArmorBoost) + ".");
+                    Console.ReadLine();
+                    Console.Clear();
 
+                    do
+                    {
+                        callBattleAgain = Battle(25, 20 + player.ArmorBoost, 5, 5, 3.33, player);
+                    } while (callBattleAgain);
+                    Console.Clear();
 
+                    Console.WriteLine("You defeat the warrior, and find yourself being hit by another warrior from the back. You fall down, and are weakened.");
+                    Console.ReadLine();
+                    Console.Clear();
 
+                    Console.WriteLine("Skeletal Warrior HP: 25.");
+                    Console.WriteLine("Your HP: " + ((20 + player.ArmorBoost) * 0.66 + "."));
+                    Console.ReadLine();
+                    Console.Clear();
+
+                    do
+                    {
+                        callBattleAgain = Battle(25, (int)((20 + player.ArmorBoost) * 0.66), 5, 5, 3.33, player);
+                    } while (callBattleAgain);
+                    Console.Clear();
 
 
 
