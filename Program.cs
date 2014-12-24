@@ -101,7 +101,7 @@ inputFail:
                     Console.WriteLine("SUCCESS");
                     Console.Clear();
 
-                    Console.WriteLine("Welcome to the game. This is a text-based RPG made by Meraj Ahmed in C#. Press  enter to continue, and begin the tutorial.");
+                    Console.WriteLine("Welcome to the game. This is a text-based RPG made by Meraj in C#. Press  enter to continue, and begin the tutorial.");
                     Console.ReadLine();
                     Console.Clear();
 
