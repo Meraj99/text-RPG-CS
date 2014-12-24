@@ -21,14 +21,13 @@ namespace textBasedRPG_CS
         static string battleChoice { get; set; }
         static string adminPasswordInput { get; set; }
 
-        static bool FireballLearnt { get; set; }
-        static int FireballLevel { get; set; }
+
+
 
         static void Main(string[] args)
         {
             PlayerStats player = new PlayerStats();
             BinaryFormatter formatter = new BinaryFormatter();
-
 
 inputFail:
             Console.WriteLine("Type play. Or, type load to load stats." + Environment.NewLine);
@@ -115,7 +114,7 @@ inputFail:
 
                     do
                     {
-                        callBattleAgain = Battle(15, 20, 5, 5, 3.33, player);
+                        callBattleAgain = Battle(15, 20, player.swordDamage, 5, 3.33, player);
                     } while (callBattleAgain);
                     Console.Clear();
 
@@ -177,17 +176,17 @@ inputFail:
 
                     do
                     {
-                        callBattleAgain = Battle(15, 20, 5, 5, 3.33, player);
+                        callBattleAgain = Battle(15, 20, player.swordDamage, 5, 3.33, player);
                     } while (callBattleAgain);
                     Console.Clear();
 
                     Console.WriteLine("The troll falls to the ground, and you find a shimmering fire essence by him.");
                     Console.WriteLine("You return to the king." + Environment.NewLine);
-                    Console.WriteLine("You have learnt the fireball skill.");
+                    Console.WriteLine("You have learnt the Fireball skill.");
                     Console.ReadLine();
                     Console.Clear();
 
-                    FireballLearnt = true; //Fireball skill learnt
+                    player.FireballLearnt = true; //Fireball skill learnt
 
                     Console.WriteLine("The king rewards you greatly with a set of Bronze Armor." + Environment.NewLine);
                     Console.WriteLine("Bronze Helmet: +2HP");
@@ -235,7 +234,7 @@ inputFail:
 
                     do
                     {
-                        callBattleAgain = Battle(25, 20 + player.ArmorBoost, 5, 5, 3.33, player);
+                        callBattleAgain = Battle(25, 20 + player.ArmorBoost, player.swordDamage, 5, 3.33, player);
                     } while (callBattleAgain);
                     Console.Clear();
 
@@ -250,8 +249,25 @@ inputFail:
 
                     do
                     {
-                        callBattleAgain = Battle(25, (int)((20 + player.ArmorBoost) * 0.66), 5, 5, 3.33, player);
+                        callBattleAgain = Battle(25, (int)((20 + player.ArmorBoost) * 0.66), player.swordDamage, 5, 3.33, player);
                     } while (callBattleAgain);
+                    Console.Clear();
+
+                    Console.WriteLine("The warrior drops a bronze sword. You pick it up." + Environment.NewLine);
+                    Console.WriteLine("The bronze sword gives you 8 damage, and a x1.2 damage multiplier.");
+                    Console.ReadLine();
+                    Console.Clear();
+
+                    player.swordDamage = 8; //Bronze sword equipped
+                    player.DamageMultiplier = 1.2F; //Bronze sword equipped
+
+                    Console.WriteLine("You find the artifact the man was looking for on the ground. You pick it up, and head back to the man.");
+                    Console.ReadLine();
+                    Console.Clear();
+
+                    Console.WriteLine("As you leave the shaft, you find a lightning relic by the exit." + Environment.NewLine);
+                    Console.WriteLine("You have learnt the Lightning skill.");
+                    Console.ReadLine();
                     Console.Clear();
 
 
@@ -307,9 +323,9 @@ inputFail:
                         userHP += battle.HealAmount;
                         break;
                     case "fireball":
-                        if (FireballLearnt)
+                        if (player.FireballLearnt)
                         {
-                            battle.Fireball(damageToUser, FireballLevel);
+                            battle.Fireball(damageToUser, player.FireballLevel);
                             break;
                         }
                         else
