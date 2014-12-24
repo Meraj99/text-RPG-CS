@@ -10,11 +10,11 @@ namespace textBasedRPG_CS
 {
     class Program
     {
-        static string input = "";
+        static string input { get; set; }
 
 
 
-        static bool callBattleAgain;
+        static bool callBattleAgain { get; set; }
 
         static int userHP { get; set; }
         static int enemyHP { get; set; }
@@ -124,14 +124,14 @@ inputFail:
                     Console.Clear();
 
                     Console.WriteLine("You have looted and equipped Starter Sword.");
-                    Console.WriteLine("Swords, armor, and equipment give you boosts to your stats. The Starter Sword you have just recieved gives you a x1.2 damage multiplier.");
+                    Console.WriteLine("Swords, armor, and equipment give you boosts to your stats. The Starter Sword   you have just recieved gives you a x1.2 damage multiplier.");
                     Console.ReadLine();
                     Console.Clear();
 
                     player.DamageMultiplier = 1.2F; //Starter Sword equipped
 
                     Console.WriteLine("Congratulations! You have successfully completed the tutorial." + Environment.NewLine);
-                    Console.WriteLine("You are now ready to play the game. You will encounter RPG elements, and new features will be introduced as you progress.");
+                    Console.WriteLine("You are now ready to play the game. You will encounter RPG elements, and new    features will be introduced as you progress.");
                     Console.ReadLine();
                     Console.Clear();
 
@@ -148,25 +148,25 @@ inputFail:
                     Console.ReadLine();
                     Console.Clear();
 
-                    Console.WriteLine("You open it, to find the king's guards waiting for you. You find that the king has summoned you.");
+                    Console.WriteLine("You open it, to find the king's guards waiting for you. You find that the king  has summoned you.");
                     Console.ReadLine();
                     Console.Clear();
 
-                    Console.WriteLine("The king has heard of your previous conquests in the land of Skyrim. He has a task waiting for you.");
+                    Console.WriteLine("The king has heard of your previous conquests in the land of Skyrim. He has a   task waiting for you.");
                     Console.ReadLine();
                     Console.Clear();
 
-                    Console.WriteLine("He informs you, of a Dark Troll in the Maiden Fields, that has been haunting the people of the village nearby.");
+                    Console.WriteLine("He informs you, of a Dark Troll in the Maiden Fields, that has been haunting thepeople of the village nearby.");
                     Console.WriteLine("He offers you the task of killing the troll, and says that he will reward you.");
                     Console.ReadLine();
                     Console.Clear();
 
-                    Console.WriteLine("You readily accept the task, and head out to the Maiden Fields, to slay the Troll, and to gain recognition amongst the king, and the people of Skyrim.");
+                    Console.WriteLine("You readily accept the task, and head out to the Maiden Fields, to slay the     Troll, and to gain recognition amongst the king, and the people of Skyrim.");
                     Console.ReadLine();
                     Console.Clear();
 
                     Console.WriteLine("You find a small cave, and head in to search for the troll." + Environment.NewLine);
-                    Console.WriteLine("You find the troll waiting for you. He lunges to swipe at you with his claws, but you quickly dodge.");
+                    Console.WriteLine("You find the troll waiting for you. He lunges to swipe at you with his claws,   but you quickly dodge.");
                     Console.ReadLine();
                     Console.Clear();
 
@@ -211,16 +211,16 @@ inputFail:
 
                 bronzeArmor:
 
-                    Console.WriteLine("He then warns you of a dragon, Alduin, that has been terrorizing the citizens of Skyim.");
+                    Console.WriteLine("He then warns you of a dragon, Alduin, that has been terrorizing the citizens ofSkyrim.");
                     Console.WriteLine("He warns you, that Alduin will not be easy to defeat, and you will need lots of preparation and training.");
                     Console.ReadLine();
                     Console.Clear();
 
-                    Console.WriteLine("You decide to head out to the town to look for small jobs, to train. As you exit the king's palace, a man asks you for some help, with recovering an ancient artifact.");
+                    Console.WriteLine("You decide to head out to the town to look for small jobs, to train. As you exitthe king's palace, a man asks you for some help, with recovering an ancient     artifact.");
                     Console.ReadLine();
                     Console.Clear();
 
-                    Console.WriteLine("You agree, and he tells you that it can be found in a mineshaft near the outskirts of the town.");
+                    Console.WriteLine("You agree, and he tells you that it can be found in a mineshaft near the        outskirts of the town.");
                     Console.ReadLine();
                     Console.Clear();
 
