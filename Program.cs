@@ -33,8 +33,8 @@ namespace textBasedRPG_CS
         static string battleChoice { get; set; }
         static string adminPasswordInput { get; set; }
 
-        public static bool FireballLearnt { get; set; }
-        public static int FireballLevel = 0;
+        static bool FireballLearnt { get; set; }
+        static int FireballLevel { get; set; }
 
         static void Main(string[] args)
         {
@@ -53,7 +53,7 @@ inputFail:
                 case "adminaccess":
                     Console.WriteLine("Enter password to access admin controls.");
                     adminPasswordInput = Console.ReadLine();
-                    if (adminPasswordInput == "admin123") //Checks if admin password input is correct
+                    if (adminPasswordInput == "admin123") //If admin password input is correct,
                     {
                         Console.WriteLine("Password accepted.");
                         Console.ReadLine();
@@ -294,6 +294,19 @@ inputFail:
                         battle.Heal(damageToUser, healLevel);
                         userHP += battle.HealAmount;
                         break;
+                    case "fireball":
+                        if (FireballLearnt)
+                        {
+                            battle.Fireball(damageToUser, FireballLevel);
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine("You have not learnt the fireball skill yet.");
+                            Console.ReadLine();
+                            Console.Clear();
+                            break;
+                        }
                     case "adminhit":
                         battle.AdminHit(player);
                         break;

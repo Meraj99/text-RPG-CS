@@ -34,9 +34,9 @@ namespace textBasedRPG_CS
         }
 
 
-        public static void Fireball(int damagetoUser)
+        public static void Fireball(int damagetoUser, int fireballLevel)
         {
-            DamageDoneToEnemy = 40 + (10 * Program.FireballLevel);
+            DamageDoneToEnemy = 40 + (10 * fireballLevel);
             DamageDoneToUser = randomGen.Next(damagetoUser);
         }
 
