@@ -9,9 +9,9 @@ namespace textBasedRPG_CS
     class battle
     {
         static Random randomGen = new Random();
-        public static int DamageDoneToEnemy;
-        public static int DamageDoneToUser;
-        public static int HealAmount;
+        public static int DamageDoneToEnemy { get; set; }
+        public static int DamageDoneToUser { get; set; }
+        public static int HealAmount { get; set; }
 
 
         public static void Hit(int damageToEnemy, int damageToUser, float damageMultiplier)
@@ -45,7 +45,7 @@ namespace textBasedRPG_CS
         {
             if (player.AdminAccess)
             {
-                Program.EnemyHP = 0;
+                DamageDoneToEnemy = 2147483647;
             }
             else
             {

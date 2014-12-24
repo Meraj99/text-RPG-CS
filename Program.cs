@@ -13,26 +13,25 @@ namespace textBasedRPG_CS
         static string input = "";
 
 
-        public static int HelmetBoost;
-        public static int ChestplateBoost;
-        public static int LeggingsBoost;
-        public static int FootwearBoost;
+        static int helmetBoost { get; set; }
+        static int chestplateBoost { get; set; }
+        static int leggingsBoost { get; set; }
+        static int footwearBoost { get; set; }
         public static int ArmorBoost
         {
             get
             {
-                return HelmetBoost + ChestplateBoost + LeggingsBoost + FootwearBoost;
+                return helmetBoost + chestplateBoost + leggingsBoost + footwearBoost;
             }
         }
 
 
-        public static int UserHP;
-        public static int EnemyHP;
-        public static int HealAmount;
-        static string battleChoice;
-        static string adminPasswordInput;
+        static int userHP { get; set; }
+        static int enemyHP { get; set; }
+        static string battleChoice { get; set; }
+        static string adminPasswordInput { get; set; }
 
-        public static bool FireballLearnt;
+        public static bool FireballLearnt { get; set; }
         public static int FireballLevel = 0;
 
         static void Main(string[] args)
@@ -101,7 +100,7 @@ inputFail:
                     Console.WriteLine("SUCCESS");
                     Console.Clear();
 
-                    Console.WriteLine("Welcome to the game. This is a text-based RPG made by Meraj in C#. Press  enter to continue, and begin the tutorial.");
+                    Console.WriteLine("Welcome to the game. This is a text-based RPG made by Meraj Ahmed in C#. Press  enter to continue, and begin the tutorial.");
                     Console.ReadLine();
                     Console.Clear();
 
@@ -123,14 +122,14 @@ inputFail:
                     Console.ReadLine();
                     Console.Clear();
 
-                    EnemyHP = 10;
-                    UserHP = 15;
-                    while (EnemyHP > 0)
+                    enemyHP = 10;
+                    userHP = 15;
+                    while (enemyHP > 0)
                     {   
                     battleChoiceFail1:
                         Console.Clear();
-                        Console.WriteLine("Enemy HP: " + EnemyHP);
-                        Console.WriteLine("User HP: " + UserHP + Environment.NewLine);
+                        Console.WriteLine("Enemy HP: " + enemyHP);
+                        Console.WriteLine("User HP: " + userHP + Environment.NewLine);
                         Console.WriteLine("Do you want to hit the enemy, bash, or heal?");
                         battleChoice = Console.ReadLine();
 
@@ -144,7 +143,7 @@ inputFail:
                                 break;
                             case "heal":
                                 battle.Heal(5, 3.33);
-                                UserHP += battle.HealAmount;
+                                userHP += battle.HealAmount;
                                 break;
                             case "fireball":
 
@@ -154,11 +153,11 @@ inputFail:
                             default:
                                 goto battleChoiceFail1;
                         }
-                        EnemyHP -= battle.DamageDoneToEnemy;
-                        UserHP -= battle.DamageDoneToUser;
+                        enemyHP -= battle.DamageDoneToEnemy;
+                        userHP -= battle.DamageDoneToUser;
                         battle.DamageDoneToEnemy = 0;
                         battle.DamageDoneToUser = 0;
-                        if (UserHP <= 0)
+                        if (userHP <= 0)
                         {
                             Console.WriteLine("You have died. Press enter to retry.");
                             Console.ReadLine();
@@ -225,14 +224,14 @@ inputFail:
                     Console.ReadLine();
                     Console.Clear();
 
-                    EnemyHP = 15;
-                    UserHP = 15;
-                    while (EnemyHP > 0)
+                    enemyHP = 15;
+                    userHP = 15;
+                    while (enemyHP > 0)
                     {   
                     battleChoiceFail2:
                         Console.Clear();
-                        Console.WriteLine("Enemy HP: " + EnemyHP);
-                        Console.WriteLine("User HP: " + UserHP + Environment.NewLine);
+                        Console.WriteLine("Enemy HP: " + enemyHP);
+                        Console.WriteLine("User HP: " + userHP + Environment.NewLine);
                         Console.WriteLine("Do you want to hit the enemy, bash, or heal?");
                         battleChoice = Console.ReadLine();
 
@@ -246,7 +245,7 @@ inputFail:
                                 break;
                             case "heal":
                                 battle.Heal(5, 3.33);
-                                UserHP += battle.HealAmount;
+                                userHP += battle.HealAmount;
                                 break;
                             case "adminhit":
                                 battle.AdminHit(player);
@@ -254,11 +253,11 @@ inputFail:
                             default:
                                 goto battleChoiceFail2;
                         }
-                        EnemyHP -= battle.DamageDoneToEnemy;
-                        UserHP -= battle.DamageDoneToUser;
+                        enemyHP -= battle.DamageDoneToEnemy;
+                        userHP -= battle.DamageDoneToUser;
                         battle.DamageDoneToEnemy = 0;
                         battle.DamageDoneToUser = 0;
-                        if (UserHP <= 0)
+                        if (userHP <= 0)
                         {
                             Console.WriteLine("You have died. Press enter to retry.");
                             Console.ReadLine();
@@ -281,11 +280,13 @@ inputFail:
                     Console.WriteLine("Bronze Chestplate: +4HP");
                     Console.WriteLine("Bronze Leggings: +2HP");
                     Console.WriteLine("Bronze Footwear: +2HP");
+                    Console.ReadLine();
+                    Console.Clear();
 
-                    HelmetBoost = 2; //Bronze Helmet equipped
-                    ChestplateBoost = 4; //Bronze Chestplate equipped
-                    LeggingsBoost = 2; //Bronze Leggings equipped
-                    FootwearBoost = 2; //Bronze Footwear equipped
+                    helmetBoost = 2; //Bronze Helmet equipped
+                    chestplateBoost = 4; //Bronze Chestplate equipped
+                    leggingsBoost = 2; //Bronze Leggings equipped
+                    footwearBoost = 2; //Bronze Footwear equipped
 
                     player.GameProgress = "bronzeArmor"; //Bronze armor acquired
 
