@@ -26,6 +26,8 @@ namespace textBasedRPG_CS
         }
 
 
+        static bool callBattleAgain;
+
         static int userHP { get; set; }
         static int enemyHP { get; set; }
         static string battleChoice { get; set; }
@@ -117,55 +119,15 @@ inputFail:
                     Console.ReadLine();
                     Console.Clear();
 
-            userDead1: //Battle 1 START
-                    Console.WriteLine("You encounter a monster with 10 HP. It looks fierce, but you think you can take it on. Your HP: 15.");
+                    Console.WriteLine("You encounter a monster with 10 HP. It looks fierce, but you think you can take it on. Your HP: 20.");
                     Console.ReadLine();
                     Console.Clear();
 
-                    enemyHP = 10;
-                    userHP = 15;
-                    while (enemyHP > 0)
-                    {   
-                    battleChoiceFail1:
-                        Console.Clear();
-                        Console.WriteLine("Enemy HP: " + enemyHP);
-                        Console.WriteLine("User HP: " + userHP + Environment.NewLine);
-                        Console.WriteLine("Do you want to hit the enemy, bash, or heal?");
-                        battleChoice = Console.ReadLine();
-
-                        switch (battleChoice.ToLower())
-                        {
-                            case "hit":
-                                battle.Hit(5, 5, player.DamageMultiplier);
-                                break;
-                            case "bash":
-                                battle.Bash(5, 5, player.DamageMultiplier);
-                                break;
-                            case "heal":
-                                battle.Heal(5, 3.33);
-                                userHP += battle.HealAmount;
-                                break;
-                            case "fireball":
-
-                            case "adminhit":
-                                battle.AdminHit(player);
-                                break;
-                            default:
-                                goto battleChoiceFail1;
-                        }
-                        enemyHP -= battle.DamageDoneToEnemy;
-                        userHP -= battle.DamageDoneToUser;
-                        battle.DamageDoneToEnemy = 0;
-                        battle.DamageDoneToUser = 0;
-                        if (userHP <= 0)
-                        {
-                            Console.WriteLine("You have died. Press enter to retry.");
-                            Console.ReadLine();
-                            Console.Clear();
-
-                            goto userDead1;
-                        }
-                    } //Battle 1 END
+                    do
+                    {
+                        callBattleAgain = Battle(15, 20, 5, 5, 3.33, player);
+                    } while (callBattleAgain);
+                    Console.Clear();
 
                     Console.WriteLine("Congratulations! You have successfully defeated the monster.");
                     Console.ReadLine();
@@ -218,54 +180,16 @@ inputFail:
                     Console.ReadLine();
                     Console.Clear();
 
-            userDead2: //Battle 2 START
                     Console.WriteLine("Dark Troll HP: 15." + Environment.NewLine);
-                    Console.WriteLine("Your HP: 15.");
+                    Console.WriteLine("Your HP: 20.");
                     Console.ReadLine();
                     Console.Clear();
 
-                    enemyHP = 15;
-                    userHP = 15;
-                    while (enemyHP > 0)
-                    {   
-                    battleChoiceFail2:
-                        Console.Clear();
-                        Console.WriteLine("Enemy HP: " + enemyHP);
-                        Console.WriteLine("User HP: " + userHP + Environment.NewLine);
-                        Console.WriteLine("Do you want to hit the enemy, bash, or heal?");
-                        battleChoice = Console.ReadLine();
-
-                        switch (battleChoice.ToLower())
-                        {
-                            case "hit":
-                                battle.Hit(5, 5, player.DamageMultiplier);
-                                break;
-                            case "bash":
-                                battle.Bash(5, 5, player.DamageMultiplier);
-                                break;
-                            case "heal":
-                                battle.Heal(5, 3.33);
-                                userHP += battle.HealAmount;
-                                break;
-                            case "adminhit":
-                                battle.AdminHit(player);
-                                break;
-                            default:
-                                goto battleChoiceFail2;
-                        }
-                        enemyHP -= battle.DamageDoneToEnemy;
-                        userHP -= battle.DamageDoneToUser;
-                        battle.DamageDoneToEnemy = 0;
-                        battle.DamageDoneToUser = 0;
-                        if (userHP <= 0)
-                        {
-                            Console.WriteLine("You have died. Press enter to retry.");
-                            Console.ReadLine();
-                            Console.Clear();
-
-                            goto userDead2;
-                        }
-                    } //Battle 2 END
+                    do
+                    {
+                        callBattleAgain = Battle(15, 20, 5, 5, 3.33, player);
+                    } while (callBattleAgain);
+                    Console.Clear();
 
                     Console.WriteLine("The troll falls to the ground, and you find a shimmering fire essence by him.");
                     Console.WriteLine("You return to the king." + Environment.NewLine);
@@ -302,6 +226,22 @@ inputFail:
                     Console.ReadLine();
                     Console.Clear();
 
+                    Console.WriteLine("You decide to head out to the town to look for small jobs, to train. As you exit the king's palace, a man asks you for some help, with recovering an ancient artifact.");
+                    Console.ReadLine();
+                    Console.Clear();
+
+                    Console.WriteLine("You agree, and he tells you that it can be found in a mineshaft near the outskirts of the town.");
+                    Console.ReadLine();
+                    Console.Clear();
+
+                    Console.WriteLine("You head out, and enter the shaft to find a skeletal warrior there.");
+                    Console.ReadLine();
+                    Console.Clear();
+
+
+
+
+
 
 
                     Console.WriteLine("WORK IN PROGRESS. WORK IN PROGRESS. WORK IN PROGRESS.");
@@ -324,5 +264,60 @@ inputFail:
             }
             Console.ReadLine();
         }
+
+
+
+
+        public static bool Battle(int enemyHP, int userHP, int damageToEnemy, int damageToUser, double healLevel, PlayerStats player)
+        {
+            
+            int enemyHPforRetry = enemyHP;
+            int userHPforRetry = userHP;
+            while (enemyHP > 0)
+            {
+            battleChoiceFail:
+                Console.Clear();
+                Console.WriteLine("Enemy HP: " + enemyHP);
+                Console.WriteLine("User HP: " + userHP + Environment.NewLine);
+                Console.WriteLine("Do you want to hit the enemy, bash, or heal?");
+                battleChoice = Console.ReadLine();
+
+                switch (battleChoice.ToLower())
+                {
+                    case "hit":
+                        battle.Hit(damageToEnemy, damageToUser, player.DamageMultiplier);
+                        break;
+                    case "bash":
+                        battle.Bash(damageToEnemy, damageToUser, player.DamageMultiplier);
+                        break;
+                    case "heal":
+                        battle.Heal(damageToUser, healLevel);
+                        userHP += battle.HealAmount;
+                        break;
+                    case "adminhit":
+                        battle.AdminHit(player);
+                        break;
+                    default:
+                        goto battleChoiceFail;
+                }
+                enemyHP -= battle.DamageDoneToEnemy;
+                userHP -= battle.DamageDoneToUser;
+                battle.DamageDoneToEnemy = 0;
+                battle.DamageDoneToUser = 0;
+                if (userHP <= 0)
+                {
+                    Console.WriteLine("You have died. Press enter to retry.");
+                    Console.ReadLine();
+                    Console.Clear();
+
+                    return true;
+                }
+            }
+            return false;
+        }
+
+
+
+
     }
 }
