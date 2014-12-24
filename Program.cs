@@ -70,6 +70,8 @@ inputFail:
                                 goto tutorialComplete;
                             case "bronzeArmor":
                                 goto bronzeArmor;
+                            case "lightningLearnt":
+                                goto lightningLearnt;
                             default:
                                 goto playStart;
                         }
@@ -269,6 +271,18 @@ inputFail:
                     Console.WriteLine("You have learnt the Lightning skill.");
                     Console.ReadLine();
                     Console.Clear();
+
+
+            lightningLearnt:
+                    player.LightningLearnt = true; //Lightning skill learnt
+
+
+                    player.GameProgress = "lightningLearnt"; //Lightning learnt
+
+                    using (Stream output = File.Create("playerStats.dat")) //Serialize save file
+                    {
+                        formatter.Serialize(output, player);
+                    }
 
 
 
