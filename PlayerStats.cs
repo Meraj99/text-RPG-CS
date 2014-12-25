@@ -14,6 +14,11 @@ namespace textBasedRPG_CS
             AdminAccess = false;
             DamageMultiplier = 1;
             swordDamage = 5;
+
+            FireballLearnt = false;
+            FireballLevel = 0;
+            LightningLearnt = false;
+            LightningLevel = 0;
         }
         public bool AdminAccess { get; set; }
         public float DamageMultiplier { get; set; }
@@ -41,5 +46,13 @@ namespace textBasedRPG_CS
                 return HelmetBoost + ChestplateBoost + LeggingsBoost + FootwearBoost;
             }
         }
+        public int UserHP
+        {
+            get
+            {
+                return (int)(20 + ArmorBoost);
+            }
+        }
+
     }
 }

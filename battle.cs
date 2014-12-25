@@ -14,15 +14,15 @@ namespace textBasedRPG_CS
         public static int HealAmount { get; set; }
 
 
-        public static void Hit(int damageToEnemy, int damageToUser, float damageMultiplier)
+        public static void Hit(int damageToEnemy, int damageToUser, PlayerStats player)
         {
-            DamageDoneToEnemy = (int)(randomGen.Next(damageToEnemy) * damageMultiplier);
+            DamageDoneToEnemy = (int)(randomGen.Next(damageToEnemy) * player.DamageMultiplier);
             DamageDoneToUser = randomGen.Next(damageToUser);
         }
 
-        public static void Bash(int damageToEnemy, int damageToUser, float damageMultiplier)
+        public static void Bash(int damageToEnemy, int damageToUser, PlayerStats player)
         {
-            DamageDoneToEnemy = (int)(randomGen.Next(damageToEnemy) + (20 / 100 * (randomGen.Next(damageToEnemy))) * damageMultiplier);
+            DamageDoneToEnemy = (int)(randomGen.Next(damageToEnemy) + (20 / 100 * (randomGen.Next(damageToEnemy))) * player.DamageMultiplier);
             DamageDoneToUser = randomGen.Next(damageToUser) + (15 / 100 * (randomGen.Next(damageToUser)));
         }
 
@@ -38,6 +38,20 @@ namespace textBasedRPG_CS
         {
             DamageDoneToEnemy = 40 + (10 * fireballLevel);
             DamageDoneToUser = randomGen.Next(damagetoUser);
+        }
+
+        public static int LightningRounds { get; set; }
+
+        public static int Lightning(int lightningLevel)
+        {
+            if (LightningRounds > 0)
+            {
+                return (10 * lightningLevel);
+            }
+            else
+            {
+                return 0;
+            }
         }
 
         

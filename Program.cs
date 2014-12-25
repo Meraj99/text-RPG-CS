@@ -116,7 +116,7 @@ inputFail:
 
                     do
                     {
-                        callBattleAgain = Battle(15, 20, player.swordDamage, 5, 3.33, player);
+                        callBattleAgain = Battle(15, player.UserHP, player.swordDamage, 5, 3.33, player);
                     } while (callBattleAgain);
                     Console.Clear();
 
@@ -178,7 +178,7 @@ inputFail:
 
                     do
                     {
-                        callBattleAgain = Battle(15, 20, player.swordDamage, 5, 3.33, player);
+                        callBattleAgain = Battle(15, player.UserHP, player.swordDamage, 5, 3.33, player);
                     } while (callBattleAgain);
                     Console.Clear();
 
@@ -236,7 +236,7 @@ inputFail:
 
                     do
                     {
-                        callBattleAgain = Battle(25, 20 + player.ArmorBoost, player.swordDamage, 5, 3.33, player);
+                        callBattleAgain = Battle(25, player.UserHP, player.swordDamage, 5, 3.33, player);
                     } while (callBattleAgain);
                     Console.Clear();
 
@@ -251,7 +251,7 @@ inputFail:
 
                     do
                     {
-                        callBattleAgain = Battle(25, (int)((20 + player.ArmorBoost) * 0.66), player.swordDamage, 5, 3.33, player);
+                        callBattleAgain = Battle(25, (int)(player.UserHP * 0.67), player.swordDamage, 5, 3.33, player);
                     } while (callBattleAgain);
                     Console.Clear();
 
@@ -275,6 +275,7 @@ inputFail:
 
             lightningLearnt:
                     player.LightningLearnt = true; //Lightning skill learnt
+                    player.LightningLevel = 1;
 
 
                     player.GameProgress = "lightningLearnt"; //Lightning learnt
@@ -327,15 +328,17 @@ inputFail:
                 switch (battleChoice.ToLower())
                 {
                     case "hit":
-                        battle.Hit(damageToEnemy, damageToUser, player.DamageMultiplier);
+                        battle.Hit(damageToEnemy, damageToUser, player);
                         break;
                     case "bash":
-                        battle.Bash(damageToEnemy, damageToUser, player.DamageMultiplier);
+
+                        battle.Bash(damageToEnemy, damageToUser, player);
                         break;
                     case "heal":
                         battle.Heal(damageToUser, healLevel);
                         userHP += battle.HealAmount;
                         break;
+                    
                     case "fireball":
                         if (player.FireballLearnt)
                         {
@@ -349,6 +352,19 @@ inputFail:
                             Console.Clear();
                             break;
                         }
+                    case "lightning":
+                        if (player.LightningLearnt)
+                        {
+                            battle.LightningRounds += 3;
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine("You have not learnt the lightning skill yet.");
+                            Console.ReadLine();
+                            Console.Clear();
+                            break;
+                        }
                     case "adminhit":
                         battle.AdminHit(player);
                         break;
@@ -357,6 +373,7 @@ inputFail:
                 }
                 enemyHP -= battle.DamageDoneToEnemy;
                 userHP -= battle.DamageDoneToUser;
+                enemyHP -= battle.Lightning(player.LightningLevel);
                 battle.DamageDoneToEnemy = 0;
                 battle.DamageDoneToUser = 0;
                 if (userHP <= 0)
