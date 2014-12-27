@@ -13,7 +13,7 @@ namespace textBasedRPG_CS
         {
             AdminAccess = false;
             DamageMultiplier = 1;
-            swordDamage = 5;
+            SwordDamage = 5;
 
             FireballLearnt = false;
             FireballLevel = 0;
@@ -27,7 +27,7 @@ namespace textBasedRPG_CS
         public int ChestplateBoost { get; set; }
         public int LeggingsBoost { get; set; }
         public int FootwearBoost { get; set; }
-        public int swordDamage { get; set; }
+        public int SwordDamage { get; set; }
 
 
 

@@ -10,15 +10,12 @@ namespace textBasedRPG_CS
 {
     class Program
     {
-        static string input { get; set; }
+        static string Input { get; set; }
 
 
 
-        static bool callBattleAgain { get; set; }
-
-        static int userHP { get; set; }
-        static int enemyHP { get; set; }
-        static string battleChoice { get; set; }
+        static bool CallBattleAgain { get; set; }
+        static string BattleChoice { get; set; }
         static string adminPasswordInput { get; set; }
 
 
@@ -32,10 +29,10 @@ namespace textBasedRPG_CS
 inputFail:
             Console.WriteLine("Type play. Or, type load to load stats." + Environment.NewLine);
             Console.WriteLine("Save file exists: " + File.Exists("playerStats.dat"));
-            input = Console.ReadLine();
+            Input = Console.ReadLine();
             Console.Clear();
 
-            switch (input.ToLower())
+            switch (Input.ToLower())
             {
 
 
@@ -116,8 +113,8 @@ inputFail:
 
                     do
                     {
-                        callBattleAgain = Battle(15, player.UserHP, player.swordDamage, 5, 3.33, player);
-                    } while (callBattleAgain);
+                        CallBattleAgain = Battle(15, player.UserHP, player.SwordDamage, 5, 3.33, player);
+                    } while (CallBattleAgain);
                     Console.Clear();
 
                     Console.WriteLine("Congratulations! You have successfully defeated the monster.");
@@ -178,8 +175,8 @@ inputFail:
 
                     do
                     {
-                        callBattleAgain = Battle(15, player.UserHP, player.swordDamage, 5, 3.33, player);
-                    } while (callBattleAgain);
+                        CallBattleAgain = Battle(15, player.UserHP, player.SwordDamage, 5, 3.33, player);
+                    } while (CallBattleAgain);
                     Console.Clear();
 
                     Console.WriteLine("The troll falls to the ground, and you find a shimmering fire essence by him.");
@@ -236,8 +233,8 @@ inputFail:
 
                     do
                     {
-                        callBattleAgain = Battle(25, player.UserHP, player.swordDamage, 5, 3.33, player);
-                    } while (callBattleAgain);
+                        CallBattleAgain = Battle(25, player.UserHP, player.SwordDamage, 5, 3.33, player);
+                    } while (CallBattleAgain);
                     Console.Clear();
 
                     Console.WriteLine("You defeat the warrior, and find yourself being hit by another warrior from the back. You fall down, and are weakened.");
@@ -251,8 +248,8 @@ inputFail:
 
                     do
                     {
-                        callBattleAgain = Battle(25, (int)(player.UserHP * 0.67), player.swordDamage, 5, 3.33, player);
-                    } while (callBattleAgain);
+                        CallBattleAgain = Battle(25, (int)(player.UserHP * 0.67), player.SwordDamage, 5, 3.33, player);
+                    } while (CallBattleAgain);
                     Console.Clear();
 
                     Console.WriteLine("The warrior drops a bronze sword. You pick it up." + Environment.NewLine);
@@ -260,7 +257,7 @@ inputFail:
                     Console.ReadLine();
                     Console.Clear();
 
-                    player.swordDamage = 8; //Bronze sword equipped
+                    player.SwordDamage = 8; //Bronze sword equipped
                     player.DamageMultiplier = 1.2F; //Bronze sword equipped
 
                     Console.WriteLine("You find the artifact the man was looking for on the ground. You pick it up, and head back to the man.");
@@ -285,7 +282,9 @@ inputFail:
                         formatter.Serialize(output, player);
                     }
 
-
+                    Console.WriteLine("You return the artifact to the man, and he rewards you with 500 gold.");
+                    Console.ReadLine();
+                    Console.Clear();
 
                     Console.WriteLine("WORK IN PROGRESS. WORK IN PROGRESS. WORK IN PROGRESS.");
                     Console.ReadLine();
@@ -313,9 +312,6 @@ inputFail:
 
         public static bool Battle(int enemyHP, int userHP, int damageToEnemy, int damageToUser, double healLevel, PlayerStats player)
         {
-            
-            int enemyHPforRetry = enemyHP;
-            int userHPforRetry = userHP;
             while (enemyHP > 0)
             {
             battleChoiceFail:
@@ -323,9 +319,9 @@ inputFail:
                 Console.WriteLine("Enemy HP: " + enemyHP);
                 Console.WriteLine("User HP: " + userHP + Environment.NewLine);
                 Console.WriteLine("Do you want to hit the enemy, bash, or heal?");
-                battleChoice = Console.ReadLine();
+                BattleChoice = Console.ReadLine();
 
-                switch (battleChoice.ToLower())
+                switch (BattleChoice.ToLower())
                 {
                     case "hit":
                         battle.Hit(damageToEnemy, damageToUser, player);
