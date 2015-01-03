@@ -16,7 +16,7 @@ namespace textBasedRPG_CS
 
         static bool CallBattleAgain { get; set; }
         static string BattleChoice { get; set; }
-        static string adminPasswordInput { get; set; }
+        static string AdminPasswordInput { get; set; }
 
 
 
@@ -38,8 +38,8 @@ inputFail:
 
                 case "adminaccess":
                     Console.WriteLine("Enter password to access admin controls.");
-                    adminPasswordInput = Console.ReadLine();
-                    if (adminPasswordInput == "admin123") //If admin password input is correct,
+                    AdminPasswordInput = Console.ReadLine();
+                    if (AdminPasswordInput == "admin123") //If admin password input is correct,
                     {
                         Console.WriteLine("Password accepted.");
                         Console.ReadLine();
@@ -187,6 +187,11 @@ inputFail:
 
                     player.FireballLearnt = true; //Fireball skill learnt
 
+                    Console.WriteLine("The fireball skill deals 40 damage, along with a bonus. The bonus increases as  you progress along the game." + Environment.NewLine);
+                    Console.WriteLine("However, 65 mana (MP) is required to cast it.");
+                    Console.ReadLine();
+                    Console.Clear();
+
                     Console.WriteLine("The king rewards you greatly with a set of Bronze Armor." + Environment.NewLine);
                     Console.WriteLine("Bronze Helmet: +2HP");
                     Console.WriteLine("Bronze Chestplate: +4HP");
@@ -260,7 +265,7 @@ inputFail:
                     player.SwordDamage = 8; //Bronze sword equipped
                     player.DamageMultiplier = 1.2F; //Bronze sword equipped
 
-                    Console.WriteLine("You find the artifact the man was looking for on the ground. You pick it up, and head back to the man.");
+                    Console.WriteLine("You find the artifact the man was looking for on the ground. You pick it up, andhead back to the man.");
                     Console.ReadLine();
                     Console.Clear();
 
@@ -269,6 +274,10 @@ inputFail:
                     Console.ReadLine();
                     Console.Clear();
 
+                    Console.WriteLine("The lightning skill does 30 damage, over 3 rounds, along with a bonus. The bonusincreases as you progress along the game." + Environment.NewLine);
+                    Console.WriteLine("However, 60 MP is required to cast it.");
+                    Console.ReadLine();
+                    Console.Clear();
 
             lightningLearnt:
                     player.LightningLearnt = true; //Lightning skill learnt
@@ -318,27 +327,31 @@ inputFail:
                 Console.Clear();
                 Console.WriteLine("Enemy HP: " + enemyHP);
                 Console.WriteLine("User HP: " + userHP + Environment.NewLine);
+                if (player.FireballLearnt)
+                {
+                    Console.WriteLine("Mana: " + player.Mana + "/100");
+                }
                 Console.WriteLine("Do you want to hit the enemy, bash, or heal?");
                 BattleChoice = Console.ReadLine();
 
                 switch (BattleChoice.ToLower())
                 {
                     case "hit":
-                        battle.Hit(damageToEnemy, damageToUser, player);
+                        textBasedRPG_CS.Battle.Hit(damageToEnemy, damageToUser, player);
                         break;
                     case "bash":
 
-                        battle.Bash(damageToEnemy, damageToUser, player);
+                        textBasedRPG_CS.Battle.Bash(damageToEnemy, damageToUser, player);
                         break;
                     case "heal":
-                        battle.Heal(damageToUser, healLevel);
-                        userHP += battle.HealAmount;
+                        textBasedRPG_CS.Battle.Heal(damageToUser, healLevel);
+                        userHP += textBasedRPG_CS.Battle.HealAmount;
                         break;
                     
                     case "fireball":
                         if (player.FireballLearnt)
                         {
-                            battle.Fireball(damageToUser, player.FireballLevel);
+                            textBasedRPG_CS.Battle.Fireball(damageToUser, player);
                             break;
                         }
                         else
@@ -351,7 +364,7 @@ inputFail:
                     case "lightning":
                         if (player.LightningLearnt)
                         {
-                            battle.LightningRounds += 3;
+                            textBasedRPG_CS.Battle.LightningRounds += 3;
                             break;
                         }
                         else
@@ -362,16 +375,17 @@ inputFail:
                             break;
                         }
                     case "adminhit":
-                        battle.AdminHit(player);
+                        textBasedRPG_CS.Battle.AdminHit(player);
                         break;
                     default:
                         goto battleChoiceFail;
                 }
-                enemyHP -= battle.DamageDoneToEnemy;
-                userHP -= battle.DamageDoneToUser;
-                enemyHP -= battle.Lightning(player.LightningLevel);
-                battle.DamageDoneToEnemy = 0;
-                battle.DamageDoneToUser = 0;
+                enemyHP -= textBasedRPG_CS.Battle.DamageDoneToEnemy;
+                userHP -= textBasedRPG_CS.Battle.DamageDoneToUser;
+                enemyHP -= textBasedRPG_CS.Battle.Lightning(player);
+                textBasedRPG_CS.Battle.DamageDoneToEnemy = 0;
+                textBasedRPG_CS.Battle.DamageDoneToUser = 0;
+                if(player.Mana > 0) player.Mana = 0;
                 if (userHP <= 0)
                 {
                     Console.WriteLine("You have died. Press enter to retry.");

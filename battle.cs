@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace textBasedRPG_CS
 {
-    class battle
+    class Battle
     {
         static Random randomGen = new Random();
         public static int DamageDoneToEnemy { get; set; }
@@ -34,19 +34,28 @@ namespace textBasedRPG_CS
         }
 
 
-        public static void Fireball(int damagetoUser, int fireballLevel)
+        public static void Fireball(int damageToUser, PlayerStats player)
         {
-            DamageDoneToEnemy = 40 + (10 * fireballLevel);
-            DamageDoneToUser = randomGen.Next(damagetoUser);
+            if (player.Mana >= 65)
+            {
+                DamageDoneToEnemy = 40 + (10 * player.FireballLevel);
+                DamageDoneToUser = randomGen.Next(damageToUser);
+            }
+            else
+            {
+                Console.WriteLine("Sorry, you don't have enough mana.");
+                Console.ReadLine();
+                Console.Clear();
+            }
         }
 
         public static int LightningRounds { get; set; }
 
-        public static int Lightning(int lightningLevel)
+        public static int Lightning(PlayerStats player)
         {
             if (LightningRounds > 0)
             {
-                return (10 * lightningLevel);
+                return (10 * player.LightningLevel);
             }
             else
             {

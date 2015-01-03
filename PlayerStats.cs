@@ -15,6 +15,9 @@ namespace textBasedRPG_CS
             DamageMultiplier = 1;
             SwordDamage = 5;
 
+
+            Mana = 100;
+
             FireballLearnt = false;
             FireballLevel = 0;
             LightningLearnt = false;
@@ -30,6 +33,8 @@ namespace textBasedRPG_CS
         public int SwordDamage { get; set; }
 
 
+
+        public int Mana { get; set; }
 
         public bool FireballLearnt { get; set; }
         public int FireballLevel { get; set; }
@@ -50,7 +55,7 @@ namespace textBasedRPG_CS
         {
             get
             {
-                return (int)(20 + ArmorBoost);
+                return 20 + ArmorBoost;
             }
         }
 
